@@ -1,0 +1,10 @@
+Number of peptides per file:
+A_bruennichi-uniquePepIDs.txt: 10632
+L_hesperus-uniquePepIDs.txt: 50699
+T_clavata-uniquePepIDs.txt: 10509
+
+Top 10 Highest Overlap Combinations:
+1. ('L_hesperus-uniquePepIDs.txt', 'T_clavata-uniquePepIDs.txt'): 8631 common peptides
+2. ('A_bruennichi-uniquePepIDs.txt', 'L_hesperus-uniquePepIDs.txt'): 8555 common peptides
+3. ('A_bruennichi-uniquePepIDs.txt', 'T_clavata-uniquePepIDs.txt'): 7350 common peptides
+4. ('A_bruennichi-uniquePepIDs.txt', 'L_hesperus-uniquePepIDs.txt', 'T_clavata-uniquePepIDs.txt'): 6437 common peptides

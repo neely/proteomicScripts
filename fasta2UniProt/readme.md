@@ -1,4 +1,4 @@
-#fasta2UniProt Scripts
+# fasta2UniProt Scripts
 
 This will contain various helper scripts with the general goal of making non-UniProt fasta into quasi-UniProt fasta.
 

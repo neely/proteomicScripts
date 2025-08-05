@@ -1,0 +1,3 @@
+python process_mgf_mzid.py 2020-1-16_Crow-Brain.mgf targets.csv MarianaCrow-F003830.mzid MarianaCrow.csv
+python output-mgfmzid-stats.py MarianaCrow.csv MarianaCrow.txt
+python process_mgf.py 2020-1-16_Crow-Brain.mgf MarianaCrow-mgfonly.csv targets.csv

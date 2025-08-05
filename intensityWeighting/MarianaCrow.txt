@@ -1,0 +1,9 @@
+Total MS2 scans:	11072
+Number of identified MS2 scans:	3834
+Percentage of identified MS2 scans:	34.63
+Total precursor intensity:	23919220192.43
+Total MS2 intensity:	31343364596.26
+Identified precursor intensity:	16209385078.53
+Identified MS2 intensity:	19388169960.00
+Percentage of total precursor intensity that is identified:	67.77
+Percentage of total MS2 intensity that is identified:	61.86

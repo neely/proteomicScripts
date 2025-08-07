@@ -18,6 +18,8 @@ process_mgf.py + mgf + optional targets = "csv of all MSMS scans and targets col
 output-mgfmzid-stats.py + "csv of all MSMS scans with identified column" = text summary of weighted and count identification rates
 
 Ex. commands with included files
+```
 python process_mgf_mzid.py 2020-1-16_Crow-Brain-truncated.mgf targets.csv MarianaCrow-F003830.mzid MarianaCrow.csv
 python output-mgfmzid-stats.py MarianaCrow.csv MarianaCrow.txt
 python process_mgf.py 2020-1-16_Crow-Brain-truncated.mgf MarianaCrow-mgfonly.csv targets.csv
+```

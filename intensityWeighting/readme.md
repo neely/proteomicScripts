@@ -12,12 +12,15 @@ These scripts use mgf files from msconvert, but any converter should work as lon
 
 Finally, there is an added "experimental" function to extract intensity of given fragment ion masses (targets.csv). This could be used for glycans, contaminants, and other diagnostic ions. This would allow quantification of how much of a given fragment ion is present, maybe indicating how many peptides are glycosylated (as an example). The attempt was to try and mimic the functionality of [mzsniffer](https://github.com/wfondrie/mzsniffer) that evaluates a contaminant list on the MS1-level, but do so on the MS2.
 
-The usage of these files is:
+The general usage of these files is:
+```
 process_mgf_mzid.py + mgf + optional targets csv + mzid = "csv of all MSMS scans with identified column and targets columns"
 process_mgf.py + mgf + optional targets csv = "csv of all MSMS scans and targets columns"
 output-mgfmzid-stats.py + "csv of all MSMS scans with identified column" = text summary of weighted and count identification rates
+```
 
-Ex. commands with included files
+
+Ex. commands with included files:
 ```
 python process_mgf_mzid.py 2020-1-16_Crow-Brain-truncated.mgf targets.csv MarianaCrow-F003830.mzid MarianaCrow.csv
 python output-mgfmzid-stats.py MarianaCrow.csv MarianaCrow.txt

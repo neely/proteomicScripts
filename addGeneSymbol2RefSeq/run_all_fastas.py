@@ -1,3 +1,22 @@
+# -----------------------------------------------------------------------------
+# INSTRUCTIONS:
+# This script processes all gzipped protein and feature table file pairs in
+# the same directory where it is run.
+#
+# HOW TO RUN:
+# 1. Place this script in a folder containing the gzipped FASTA and feature table files.
+# 2. Ensure that 'modify_fasta_headers.py' is also in the same folder.
+# 3. Open your terminal or command prompt.
+# 4. Navigate to that folder.
+# 5. Run the script with the following command:
+#    python run_all_fastas_updated.py
+#
+# The script will automatically find all corresponding protein and feature
+# table file pairs, decompress them, and run the 'modify_fasta_headers.py'
+# script on each pair. It will then clean up the intermediate decompressed files.
+#
+# -----------------------------------------------------------------------------
+
 import os
 import glob
 import gzip
@@ -72,9 +91,9 @@ def process_pairs(pairs, original_script):
             # Define the output filename with the new format
             try:
                 # Get the filename without the path and suffix
-                prefix_parts = os.path.basename(protein_file_gz).split('-', 2)[:2]
-                prefix = "_".join(prefix_parts)
-                output_fasta = f"{prefix}_{accession}_modified.fasta"
+                filename = os.path.basename(protein_file_gz)
+                prefix = filename.split('GCF')[0]
+                output_fasta = f"{prefix}{accession}_modified.fasta"
             except IndexError:
                 print(f"  Error: Could not parse prefix from {os.path.basename(protein_file_gz)}. Using default naming.")
                 output_fasta = f"{accession}_modified.fasta"

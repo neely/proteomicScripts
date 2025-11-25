@@ -39,6 +39,8 @@ This script processes all FASTA files in the same directory where it is run.
 The script will automatically find all files with a '.fasta' extension, process each one, and save the output as a new file with the suffix '_uniprot_spoof.fasta'.
 
 <br>
+
+
 ## ensembl_spoof_uniprot_headers.py
 
 The third script, **ensembl_spoof_uniprot_headers.py** is the same concept but takes in Ensembl formatted files. This is rare you would need to use an Ensembl file instead of a RefSeq (or even UniProt for that matter), so maybe don't worry about this unless you have hyrax data. The usage is the same as **spoof_uniprot_headers.py**.

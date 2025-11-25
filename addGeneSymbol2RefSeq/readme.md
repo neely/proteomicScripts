@@ -9,7 +9,9 @@ This script updates the headers of a RefSeq FASTA file. It reads a tab-separated
 Usage:
 To use, run the following command from your terminal in the directory containing the files:
 
-```python modify_fasta_headers.py <input.fasta> <input.tsv> <output.fasta>```
+```
+python modify_fasta_headers.py <input.fasta> <input.tsv> <output.fasta>
+```
 
 - <input.fasta>: The original FASTA file.
 - <input.tsv>: The feature table TSV file (will contain 'product_accession' and 'symbol' columns).

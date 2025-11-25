@@ -2,7 +2,13 @@
 
 This folder contains various helper scripts with the general goal of making non-UniProt FASTA into quasi-UniProt FASTA. This is important for search tools such as FragPipe and DIA-NN.
 
+
+## convert_Bat1K_fasta_headers.py
+
 The first script, named **convert_Bat1K_fasta_headers.py**, was created to make an in-house one-off protein FASTA look like a UniProt FASTA. This situation is described in the file itself.
+
+
+## spoof_uniprot_headers.py
 
 The second script, **spoof_uniprot_headers.py**, is built off the [addGeneSymbol2RefSeq](https://github.com/neely/proteomicScripts/tree/main/addGeneSymbol2RefSeq) output. This script takes a FASTA file with headers in the format:
 ```
@@ -32,6 +38,8 @@ This script processes all FASTA files in the same directory where it is run.
 <br>
 The script will automatically find all files with a '.fasta' extension, process each one, and save the output as a new file with the suffix '_uniprot_spoof.fasta'.
 
+<br>
+## ensembl_spoof_uniprot_headers.py
 
 The third script, **ensembl_spoof_uniprot_headers.py** is the same concept but takes in Ensembl formatted files. This is rare you would need to use an Ensembl file instead of a RefSeq (or even UniProt for that matter), so maybe don't worry about this unless you have hyrax data. The usage is the same as **spoof_uniprot_headers.py**.
 

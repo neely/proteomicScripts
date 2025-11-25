@@ -1,5 +1,9 @@
 # addGeneSymbol2RefSeq
 
+
+## modify_fasta_headers.py
+
+
 This script updates the headers of a RefSeq FASTA file. It reads a tab-separated value (TSV) feature table file (available on NCBI where you got the fasta), mapping protein accession numbers to gene symbols. For each sequence in the input FASTA file, the script identifies the accession number in the header and searches for a matching entry in the TSV file. If a match is found, it appends the corresponding gene symbol to the end of the FASTA header in the format "GN=<symbol>", similar to how UniProt FASTA headers are formatted. The script then writes the sequences with their modified headers to a new output FASTA file.
 
 Usage:
@@ -21,3 +25,17 @@ You should have these two files now, which are also included here:
 GCF_009762305.2_mZalCal1.pri.v2_feature_table.txt
 
 GCF_009762305.2_mZalCal1.pri.v2_protein.fasta
+
+
+## run_all_fastas.py
+
+Maybe you have a bunch of files and you don't want to run this on each one, and you were actually too lazy to even unzip the refseq files themselves. Look no more, we have you covered! This script will finds pairs of gzipped protein and feature table files in a given directory. Next it will run the modify_fasta_headers.py to generate a header with GN= at the end. The pairs are identified by a common accession number in their filenames. These files are from the NCBI RefSeq FTP, since the file names contain info on refseq aasembly name. It assumes that when the protein.faa.gz file was downloaded, some identifier was added as a prefix.
+
+    Ex. RefSeq_N_fur_seal_GCF*.protein.faa.gz
+
+This prefix is used to name the resulting file, but the feature_table.txt.gz does not need to be renamed (it just knows and is magic... or it uses the assembly identifier instead). 
+
+To run this, placed run_all_fastas.py in the directory of the pairs, along with modify_fasta_headers.py and executing:
+```
+python run_all_fastas.py
+```

@@ -18,11 +18,14 @@
 # This script takes a FASTA file with headers in the format:
 # >XP_024421550.2 lactotransferrin [Desmodus rotundus] GN=LTF
 # and transforms them into a UniProt-like format:
-# >rs|XP_024421550.2|LTF_DESRO lactotransferrin OS=Desmodus rotundus GN=LTF
+# >sp|XP_024421550.2|LTF_DESRO lactotransferrin OS=Desmodus rotundus GN=LTF
 #
-# The script extracts the necessary information (accession, gene symbol,
-# and species name) to construct the new formatted header. It processes
-# each input FASTA file and creates a new corresponding output file.
+#
+# note that I wanted to use rs for refseq, but some parsers expect sp or tr.
+# also, future versions may offer the ability to add in the taxID field.
+#
+# The script now correctly handles protein names that also contain brackets,
+# treating only the last bracketed element before 'GN=' as the species name.
 
 import sys
 import re
@@ -35,34 +38,44 @@ def parse_and_format_header(header_line):
     the new UniProt-like format.
     """
     # Remove the leading '>'
-    header = header_line.lstrip('>')
-    
-    # Use regular expressions to extract key components
-    # Pattern: accession, description, species name in brackets, and GN=symbol
-    match = re.search(r'^(\S+)\s+(.+?)\s+\[(.+?)\]\s+GN=(.+)$', header)
-    
-    if not match:
-        # If the expected pattern is not found, return the original header with a warning
-        print(f"Warning: Could not parse header, skipping formatting for: {header_line.strip()}", file=sys.stderr)
+    header = header_line.strip('>')
+
+    # Find the position of ' GN=' to split the header
+    gn_index = header.rfind(' GN=')
+    if gn_index == -1:
+        print(f"Warning: Could not find 'GN=' in header, skipping formatting for: {header}", file=sys.stderr)
         return header_line.strip()
-        
-    accession = match.group(1)
-    description = match.group(2)
-    species_full = match.group(3)
-    gene_symbol = match.group(4)
-    
+
+    # Split the header into the main part and the gene symbol
+    main_part = header[:gn_index]
+    gene_symbol = header[gn_index + 4:]
+
+    # Find the last bracketed part, which should be the species name
+    species_match = re.search(r'\[([^\]]+)\]$', main_part)
+    if not species_match:
+        print(f"Warning: Could not find a species name in brackets, skipping formatting for: {header}", file=sys.stderr)
+        return header_line.strip()
+
+    species_full = species_match.group(1)
+
+    # The protein accession is the first word
+    accession = main_part.split(None, 1)[0]
+
+    # The description is everything between the accession and the species name
+    description_part = main_part[len(accession):].strip()
+    # Remove the species name and its brackets from the description
+    description = description_part.rsplit(f'[{species_full}]', 1)[0].strip()
+
     # Extract species code from full species name (e.g., "Desmodus rotundus" -> "DESRO")
     species_parts = species_full.split()
     if len(species_parts) >= 2:
         species_code = f"{species_parts[0][:3].upper()}{species_parts[1][:2].upper()}"
     else:
-        # Fallback if species name is not in the expected format
         species_code = "UNKN"
 
-    # Construct the new header in the desired format
-    # Example: >rs|XP_024421550.2|LTF_DESRO lactotransferrin OS=Desmodus rotundus GN=LTF
+    # Construct the new header in the desired format using 'sp'
     new_header = (
-        f"rs|{accession}|{gene_symbol}_{species_code} "
+        f"sp|{accession}|{gene_symbol}_{species_code} "
         f"{description} OS={species_full} GN={gene_symbol}"
     )
     

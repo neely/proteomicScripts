@@ -1,7 +1,7 @@
 """
-convert_fasta_headers.py
+convert_Bat1K_fasta_headers.py
 
-Converts FASTA headers into a UniProt-like format.
+Converts Bat1K FASTA headers into a UniProt-like format.
 
 ## INPUT FORMAT:
     >ENST00000343518.POTEH.43096 JAUMIU010000140:8603-8709
